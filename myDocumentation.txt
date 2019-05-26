@@ -12,3 +12,22 @@ VagrantFile
 bower_components/
 node_modules
 package-lock.json
+
+//http://learn.codingdojo.com/m/102/4737/38610
+
+server {
+    listen 80;
+    location / {
+        proxy_pass http://172.31.30.49:8000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
+sudo ln -s /etc/nginx/sites-available/disasterCkd /etc/nginx/sites-enabled/disasterCkd
+
+//if ng build gives an error, run the following before trying ng build again
+npm install rxjs@6.0.0 --save
